@@ -210,9 +210,9 @@ li {
   }
 
   .end-game {
-    bottom: 25%;
+    bottom: 22%;
     width: 100%;
-    height: 67%;
+    height: 73%;
   }
 
   #win p {
@@ -252,8 +252,8 @@ li {
   }
   
   .end-game {
-    bottom: 15%;
-    height: 75%;
+    bottom: 12%;
+    height: 78%;
     width: 85%;
   }
 }
@@ -272,8 +272,8 @@ li {
   }
 
   .end-game {
-    bottom: 9%;
-    height: 80%;
+    bottom: 7%;
+    height: 83%;
   }
 
   #win p {
@@ -315,8 +315,8 @@ li {
   }
 
   .end-game {
-    bottom: 7%;
-    height: 83%;
+    bottom: 5%;
+    height: 84%;
   }
 }
 
@@ -342,8 +342,8 @@ li {
   }
 
   .end-game {
-    bottom: 3%;
-    height: 86%;
+    bottom: 1%;
+    height: 87%;
   }
 }
 
@@ -353,7 +353,7 @@ li {
   }
 
   .end-game {
-    bottom: 2%;
+    bottom: 1%;
     height: 89%;
     width: 70%;
   }
