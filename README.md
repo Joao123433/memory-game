@@ -1,5 +1,5 @@
 # Jogo da Memória
-Este é um jogo da memória desenvolvido em HTML, CSS e Typescript. O jogo é composto por cartas que têm pares correspondentes. O objetivo é encontrar todos os pares de cartas, fazendo o menor número possível de movimentos, o códgo possui retorno visual se as cartas são iguais ou diferentes, ao ganhar é mostrado um top 3 de melhores desempenho.
+Este é um jogo da memória desenvolvido em HTML, CSS e Typescript. O jogo é composto por cartas que têm pares correspondentes. O objetivo é encontrar todos os pares de cartas, fazendo o menor número possível de movimentos, o código possui retorno visual se as cartas forem iguais ou diferentes, ao ganhar é mostrado um top 3 de melhores desempenho.
 
 ## Link para o Projeto
 https://joao123433.github.io/memory-game/
