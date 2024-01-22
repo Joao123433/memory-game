@@ -72,7 +72,6 @@ section div {
   width: 100%;
   display: flex;
   justify-content: center;
-  opacity: 1;
 }
 
 div button {
@@ -84,14 +83,14 @@ div button {
   background-image: url("https://static.vecteezy.com/system/resources/previews/007/126/739/non_2x/question-mark-icon-free-vector.jpg");
   background-size: cover;
   background-position: center;
+  background-color: black;
 }
 
 div button svg {
   border-radius: 5px;
-  width: calc(100% - 10px);
-  height: calc(100% - 10px);
-  background-color: black;
-  opacity: 1;
+  width: calc(85% - 10px);
+  height: calc(85% - 10px);
+  opacity: 0;
   padding: 5px;
 }
 
@@ -281,5 +280,34 @@ div button svg {
 @media (min-height: 1300px) {
   main {
     height: 58%;
+  }
+}
+
+.select {
+  background-color: #00B4E8;
+  animation-duration: 0.8s;
+}
+
+.different {
+  background-color: #FF0022;
+  animation-duration: 0.7s;
+  animation-delay: 0s;
+}
+
+.matching {
+  background-color: #00BE52;
+}
+
+.spin {
+  animation: rotate 0.5s linear;
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
   }
 }
