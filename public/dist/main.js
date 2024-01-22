@@ -147,13 +147,12 @@ function top3() {
         }
     }
     arrTop3.sort((a, b) => a.split(" ")[0] - b.split(" ")[0]).slice(0, 3);
-    console.log(arrTop3);
     renderTop3(arrTop3);
 }
 function renderTop3(top3) {
     var _a;
     for (let i = 0; i < liTop3.length; i++) {
-        liTop3[i].textContent = (_a = top3[i]) !== null && _a !== void 0 ? _a : "Sem Registro";
+        liTop3[i].textContent = (_a = top3[i]) !== null && _a !== void 0 ? _a : "Jogue Mais Vezes";
     }
 }
 function saveLocalStorage(moves, timer) {
@@ -219,7 +218,6 @@ function differentCards() {
 }
 function restart() {
     zeringValues();
-    zeroTimerAndMoves();
     this.classList.remove("spin");
     setTimeout(() => this.classList.add("spin"), 1);
 }
