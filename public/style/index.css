@@ -118,7 +118,7 @@ div button svg {
 
 #game-over {
   background-color: #ff0022ea;
-  display: flex;
+  display: var(--display);
   flex-direction: column;
   align-items: center;
   justify-content: center;
