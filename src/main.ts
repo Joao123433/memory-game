@@ -171,7 +171,7 @@ function top3() {
 
 function renderTop3(top3) {
   for(let i = 0; i < liTop3.length; i++) {
-    liTop3[i].textContent = top3[i] ?? "Sem Registro"
+    liTop3[i].textContent = top3[i] ?? "Jogue Mais Vezes"
   }
 }
 
