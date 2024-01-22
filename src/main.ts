@@ -154,7 +154,6 @@ function win() {
   saveLocalStorage(currentMoves, currentTimer)
   renderInfoWin(currentMoves, currentTimer)
   top3()
-
 }
 
 function top3() {
@@ -167,7 +166,6 @@ function top3() {
     }
   }
   arrTop3.sort((a, b) => a.split(" ")[0] - b.split(" ")[0]).slice(0, 3)
-  console.log(arrTop3)
   renderTop3(arrTop3)
 }
 
@@ -254,7 +252,6 @@ function differentCards() {
 
 function restart() {
   zeringValues()
-  zeroTimerAndMoves()
   this.classList.remove("spin")
   setTimeout(() => this.classList.add("spin"), 1)
 }
