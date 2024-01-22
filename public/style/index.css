@@ -1,8 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap');
+
 * {
   margin: 0;
   padding: 0;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Montserrat', sans-serif;
   color: white;
+}
+
+:root {
+  --display: none;
 }
 
 body {
@@ -94,6 +100,65 @@ div button svg {
   padding: 5px;
 }
 
+.end-game {
+  position: absolute;
+  bottom: 34%;
+  width: 100%;
+  height: 55%;
+  border-radius: 8px;
+}
+
+#win {
+  background-color: #657a92f1;
+  display: var(--display);
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+#game-over {
+  background-color: #ff0022ea;
+  display: var(--display);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+}
+
+.show {
+  --display: flex;
+}
+
+#win p {
+  font-weight: 500;
+}
+
+ol { 
+  list-style-position: inside;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 5px 8px;
+  background-color: white;
+  border-radius: 8px;
+  margin: 15px 0px;
+}
+
+li {
+  color: #000;
+  font-weight: 600;
+}
+
+#win button, #game-over button {
+  width: 60%;
+  background-image: none;
+  background-color: #000;
+  color: white;
+  font-size: 1rem;
+  padding: 8px 10px;
+  margin-bottom: 50px;
+}
+
 @media (min-width: 300px) {
   main section {
     width: calc(90% - 16px);
@@ -111,6 +176,27 @@ div button svg {
 
   header p {
     font-size: 23px;
+  }  
+  
+  .end-game {
+    bottom: 30%;
+    width: 100%;
+    height: 60%;
+  }
+}
+
+@media (min-width: 375px) {
+  #win p {
+    font-size: 20px;
+  }
+
+  ol {
+    gap: 10px;
+    padding: 8px 13px;
+  }
+
+  li {
+    font-size: 23px;
   }
 }
 
@@ -121,6 +207,29 @@ div button svg {
 
   main h1 {
     font-size: 2.3rem;
+  }
+
+  .end-game {
+    bottom: 25%;
+    width: 100%;
+    height: 67%;
+  }
+
+  #win p {
+    font-size: 23px;
+  }
+
+  ol {
+    gap: 10px;
+    padding: 8px 13px;
+  }
+
+  li {
+    font-size: 23px;
+  }
+
+  #win button {
+    font-size: 1.3rem;
   }
 }
 
@@ -141,6 +250,12 @@ div button svg {
     width: calc(80% - 16px);
     padding: 10px 8px;
   }
+  
+  .end-game {
+    bottom: 18%;
+    height: 70%;
+    width: 85%;
+  }
 }
 
 @media (min-width: 600px) {
@@ -155,31 +270,22 @@ div button svg {
   header button {
     width: 5%;
   }
-}
 
-@media (min-width: 700px) {
-  main {
-    height: 83%;
+  .end-game {
+    bottom: 9%;
+    height: 80%;
   }
 
-  main h1 {
-    font-size: 2.5rem;
+  #win p {
+    font-size: 1.8rem;
   }
 
-  header button {
-    width: 4%;
+  li {
+    font-size: 1.8rem;
   }
 
-  main section {
-    width: calc(75% - 16px);
-  }
-
-  section div {
-    width: 88%;
-  }
-
-  div button {
-    width: 100%;
+  #win button {
+    font-size: 1.8rem;
   }
 }
 
@@ -206,6 +312,11 @@ div button svg {
 
   div button {
     width: 100%;
+  }
+
+  .end-game {
+    bottom: 7%;
+    height: 83%;
   }
 }
 
@@ -229,11 +340,22 @@ div button svg {
   main section {
     width: calc(70% - 16px);
   }
+
+  .end-game {
+    bottom: 3%;
+    height: 86%;
+  }
 }
 
 @media (min-width: 900px) {
   main section {
     width: calc(65% - 16px);
+  }
+
+  .end-game {
+    bottom: 2%;
+    height: 89%;
+    width: 70%;
   }
 }
 
@@ -245,6 +367,16 @@ div button svg {
 
   main section {
     width: calc(55% - 16px);
+  }
+
+  .end-game {
+    bottom: 8%;
+    height: 86%;
+    width: 70%;
+  }
+
+  #win p {
+    font-size: 2rem;
   }
 }
 
@@ -261,6 +393,24 @@ div button svg {
   main section {
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: none;
+  }
+
+  .end-game {
+    bottom: 23%;
+    height: 72%;
+    width: 60%;
+  }
+
+  #win p {
+    font-size: 1.7rem;
+  }
+
+  li {
+    font-size: 1.5rem;
+  }
+
+  #win button {
+    font-size: 1.5rem;
   }
 }
  
@@ -283,6 +433,16 @@ div button svg {
   }
 }
 
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
 .select {
   background-color: #00B4E8;
   animation-duration: 0.8s;
@@ -300,14 +460,4 @@ div button svg {
 
 .spin {
   animation: rotate 0.5s linear;
-}
-
-@keyframes rotate {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
 }

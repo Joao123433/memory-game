@@ -11,6 +11,12 @@ const sectionCards = document.querySelector("#section-cards");
 const timer = document.querySelector("#timer");
 const countMoves = document.querySelector("#moves");
 const btnRestart = document.querySelector("#repeat");
+const divWin = document.querySelector("#win");
+const divGameOver = document.querySelector("#game-over");
+const btnPlayAgain = document.querySelectorAll("#play-again");
+const spanTimerWin = document.querySelector("#win-timer");
+const spanMovesWin = document.querySelector("#win-moves");
+const liTop3 = document.querySelectorAll("#top3");
 const classes = ["select", "different", "matching", "spin", "animate__flipInY", "animate__flipOutY", "animate__animated"];
 let btnCards;
 let cardsRandom = [];
@@ -98,7 +104,7 @@ function starTimer() {
         let setSeg;
         let setMin;
         segundos++;
-        if (segundos > 60) {
+        if (segundos > 59) {
             minutos++;
             segundos = 0;
         }
@@ -121,6 +127,43 @@ function starTimer() {
     }, 1000);
 }
 function gameOver() {
+    divGameOver.classList.add("show");
+}
+function win() {
+    divWin.classList.add("show");
+    const currentMoves = document.querySelector("#moves").innerText;
+    const currentTimer = document.querySelector("#timer").innerText;
+    clearInterval(meuInterval);
+    saveLocalStorage(currentMoves, currentTimer);
+    renderInfoWin(currentMoves, currentTimer);
+    top3();
+}
+function top3() {
+    const datas = localStorage;
+    const arrTop3 = [];
+    for (const chave in datas) {
+        if (datas.hasOwnProperty(chave)) {
+            arrTop3.push(datas.getItem(chave));
+        }
+    }
+    arrTop3.sort((a, b) => a.split(" ")[0] - b.split(" ")[0]).slice(0, 3);
+    console.log(arrTop3);
+    renderTop3(arrTop3);
+}
+function renderTop3(top3) {
+    var _a;
+    for (let i = 0; i < liTop3.length; i++) {
+        liTop3[i].textContent = (_a = top3[i]) !== null && _a !== void 0 ? _a : "Sem Registro";
+    }
+}
+function saveLocalStorage(moves, timer) {
+    const id = moves.split(" ")[0];
+    const element = `${moves} | ${timer}`;
+    localStorage.setItem(id, element);
+}
+function renderInfoWin(moves, timer) {
+    spanMovesWin.innerText = moves;
+    spanTimerWin.innerText = timer;
 }
 function removeBackground() {
     compareCards[0].style.backgroundImage = 'none';
@@ -155,6 +198,9 @@ function matchingCards() {
     addClasses("matching");
     addClick();
     compareCards = [];
+    if (btnCards.length === 0) {
+        win();
+    }
 }
 function differentCards() {
     addClasses("different");
@@ -172,12 +218,15 @@ function differentCards() {
     }, 1100);
 }
 function restart() {
-    document.querySelectorAll("div[id='card']").forEach(e => e.remove());
-    this.classList.remove("spin");
+    zeringValues();
     zeroTimerAndMoves();
-    getCards();
+    this.classList.remove("spin");
     setTimeout(() => this.classList.add("spin"), 1);
-    cardsRandom = [];
+}
+function playAgain() {
+    zeringValues();
+    divWin.classList.remove("show");
+    divGameOver.classList.remove("show");
 }
 function zeroTimerAndMoves() {
     moves = 0;
@@ -185,5 +234,13 @@ function zeroTimerAndMoves() {
     timer.textContent = "00:00s";
     countMoves.textContent = `${moves} movimentos`;
 }
+function zeringValues() {
+    document.querySelectorAll("div[id='card']").forEach(e => e.remove());
+    zeroTimerAndMoves();
+    getCards();
+    cardsRandom = [];
+    compareCards = [];
+}
 btnRestart.addEventListener("click", restart);
 document.addEventListener("DOMContentLoaded", getCards);
+btnPlayAgain.forEach(b => b.addEventListener("click", playAgain));

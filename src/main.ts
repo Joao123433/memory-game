@@ -2,6 +2,13 @@ const sectionCards: HTMLElement = document.querySelector("#section-cards")
 const timer: HTMLParagraphElement = document.querySelector("#timer")
 const countMoves: HTMLParagraphElement = document.querySelector("#moves")
 const btnRestart: HTMLButtonElement = document.querySelector("#repeat")
+const divWin: HTMLDivElement = document.querySelector("#win")
+const divGameOver: HTMLDivElement = document.querySelector("#game-over")
+const btnPlayAgain: NodeListOf<HTMLButtonElement> = document.querySelectorAll("#play-again")
+const spanTimerWin: HTMLSpanElement = document.querySelector("#win-timer")
+const spanMovesWin: HTMLSpanElement = document.querySelector("#win-moves")
+const liTop3: NodeListOf<HTMLLIElement> = document.querySelectorAll("#top3")
+
 const classes = ["select", "different", "matching", "spin", "animate__flipInY", "animate__flipOutY", "animate__animated"]
 
 let btnCards
@@ -109,7 +116,7 @@ function starTimer() {
     let setMin: any
     segundos++
 
-    if(segundos > 60) {
+    if(segundos > 59) {
       minutos++
       segundos = 0
     }
@@ -135,7 +142,50 @@ function starTimer() {
 }
 
 function gameOver() {
+  divGameOver.classList.add("show")
+}
 
+function win() {
+  divWin.classList.add("show")
+  const currentMoves = document.querySelector<HTMLParagraphElement>("#moves").innerText
+  const currentTimer = document.querySelector<HTMLParagraphElement>("#timer").innerText
+
+  clearInterval(meuInterval)
+  saveLocalStorage(currentMoves, currentTimer)
+  renderInfoWin(currentMoves, currentTimer)
+  top3()
+
+}
+
+function top3() {
+  const datas = localStorage
+  const arrTop3 = []
+
+  for(const chave in datas) {
+    if (datas.hasOwnProperty(chave)) {
+      arrTop3.push(datas.getItem(chave))
+    }
+  }
+  arrTop3.sort((a, b) => a.split(" ")[0] - b.split(" ")[0]).slice(0, 3)
+  console.log(arrTop3)
+  renderTop3(arrTop3)
+}
+
+function renderTop3(top3) {
+  for(let i = 0; i < liTop3.length; i++) {
+    liTop3[i].textContent = top3[i] ?? "Sem Registro"
+  }
+}
+
+function saveLocalStorage(moves: string, timer: string) {
+  const id = moves.split(" ")[0]
+  const element = `${moves} | ${timer}`
+  localStorage.setItem(id, element)
+}
+
+function renderInfoWin(moves: string, timer: string) {
+  spanMovesWin.innerText = moves
+  spanTimerWin.innerText = timer
 }
 
 function removeBackground() {
@@ -177,6 +227,10 @@ function matchingCards() {
   addClasses("matching")
   addClick()
   compareCards = []
+
+  if(btnCards.length === 0) {
+    win()
+  }
 }
 
 function differentCards() {
@@ -199,12 +253,16 @@ function differentCards() {
 }
 
 function restart() {
-  document.querySelectorAll("div[id='card']").forEach(e => e.remove())
-  this.classList.remove("spin")
+  zeringValues()
   zeroTimerAndMoves()
-  getCards()
+  this.classList.remove("spin")
   setTimeout(() => this.classList.add("spin"), 1)
-  cardsRandom = []
+}
+
+function playAgain() {
+  zeringValues()
+  divWin.classList.remove("show")
+  divGameOver.classList.remove("show")
 }
 
 function zeroTimerAndMoves() {
@@ -214,5 +272,14 @@ function zeroTimerAndMoves() {
   countMoves.textContent = `${moves} movimentos`
 }
 
+function zeringValues() {
+  document.querySelectorAll("div[id='card']").forEach(e => e.remove())
+  zeroTimerAndMoves()
+  getCards()
+  cardsRandom = []
+  compareCards = []
+}
+
 btnRestart.addEventListener("click", restart)
 document.addEventListener("DOMContentLoaded", getCards)
+btnPlayAgain.forEach(b => b.addEventListener("click", playAgain))
