@@ -33,7 +33,6 @@ function createDiv() {
     const div = document.createElement("div");
     return div;
 }
-alert(document.body.clientWidth);
 function createBtn(cardElement) {
     const button = document.createElement("button");
     button.id = "btn-card";
