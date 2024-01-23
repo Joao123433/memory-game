@@ -11,16 +11,31 @@ const liTop3: NodeListOf<HTMLLIElement> = document.querySelectorAll("#top3")
 
 const classes = ["select", "different", "matching", "spin", "animate__flipInY", "animate__flipOutY", "animate__animated"]
 
-let btnCards
-let cardsRandom = []
-let compareCards = []
-let moves = 0
-let meuInterval
+let btnCards: HTMLButtonElement[]
+let cardsRandom: Card[] = []
+let compareCards: ButtonElement[] = []
+let moves: number = 0
+let meuInterval: number
 
 interface Card {
   name: string
   card: string
   id: number
+}
+
+interface ButtonElement {
+  dataset: {
+    name: string
+  }
+  style: {
+    backgroundImage: string
+  }
+  classList: {
+    add: (arg0: string, arg1?: string) => void
+    remove: (arg0: string) => void
+  }
+  children: object
+  addEventListener: any
 }
 
 async function fetchCards() {
@@ -55,10 +70,10 @@ async function getCards() {
   const cards = await fetchCards()
   sortCards(cards.cards)
   cardsRandom.forEach(c => renderCards(c))
-  btnCards = [...document.querySelectorAll("button[id='btn-card']")]
+  btnCards = [...document.querySelectorAll<HTMLButtonElement>("button[id='btn-card']")]
 }
 
-function sortCards(cards: Card[]) {
+function sortCards(cards: { splice: (arg0: number, arg1: number) => Card; length: number }) {
   for(let i = 0; i < 16; i++) {
     cardsRandom.push(cards.splice(Math.floor(Math.random() * cards.length), 1))
   }
@@ -108,12 +123,12 @@ function setMoves() {
 }
 
 function starTimer() {
-  let segundos= 0
+  let segundos = 0
   let minutos = 0
 
   meuInterval = setInterval(() => {
-    let setSeg: any
-    let setMin: any
+    let setSeg: string | number
+    let setMin: string | number
     segundos++
 
     if(segundos > 59) {
@@ -142,6 +157,7 @@ function starTimer() {
 }
 
 function gameOver() {
+  clearInterval(meuInterval)
   divGameOver.classList.add("show")
 }
 
@@ -213,14 +229,14 @@ function addClasses(styleclass: string) {
   compareCards[1].classList.add(styleclass)
 }
 
-function removeCardArray(element: HTMLButtonElement) {
+function removeCardArray(element) {
   const index = btnCards.indexOf(element)
   btnCards.splice(index, 1)
 }
 
 function matchingCards() {
   removeClick(compareCards)
-  compareCards.forEach(e => removeCardArray(e))
+  compareCards.forEach((e) => removeCardArray(e))
   removeAllClasses()
   addClasses("matching")
   addClick()

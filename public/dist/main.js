@@ -127,6 +127,7 @@ function starTimer() {
     }, 1000);
 }
 function gameOver() {
+    clearInterval(meuInterval);
     divGameOver.classList.add("show");
 }
 function win() {
@@ -192,7 +193,7 @@ function removeCardArray(element) {
 }
 function matchingCards() {
     removeClick(compareCards);
-    compareCards.forEach(e => removeCardArray(e));
+    compareCards.forEach((e) => removeCardArray(e));
     removeAllClasses();
     addClasses("matching");
     addClick();
