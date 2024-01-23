@@ -110,7 +110,7 @@ div button svg {
 
 #win {
   background-color: #657a92f1;
-  display: var(--display);
+  display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
@@ -181,9 +181,9 @@ li {
   }  
   
   .end-game {
-    bottom: 35%;
+    bottom: 32%;
     width: 90%;
-    height: 57%;
+    height: 59%;
   }
 }
 
