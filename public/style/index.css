@@ -110,7 +110,7 @@ div button svg {
 
 #win {
   background-color: #657a92f1;
-  display: flex;
+  display: var(--display);
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
