@@ -48,6 +48,8 @@ function createDiv() {
   return div
 }
 
+alert(document.body.clientWidth)
+
 function createBtn(cardElement: Card) {
   const button = document.createElement("button")
   button.id = "btn-card"
